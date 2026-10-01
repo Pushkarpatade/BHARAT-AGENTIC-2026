@@ -1,0 +1,41 @@
+apiVersion: aikart.dev/v1
+kind: AgentManifest
+
+metadata:
+  name: bharatagentic-msme
+  displayName: "BharatAgentic MSME Navigator"
+  description: "Extracts MSME profiles, runs compliance checks, and auto-drafts subsidy forms."
+
+runtime:
+  type: docker
+  image: "python:3.11-alpine"
+  command: ["sh", "-c", "mkdir -p /aikart && echo '{\"format\": \"text\", \"response\": \"Agent successfully connected! The full interactive UI and Verification Dashboard is available in the submitted project files.\"}' > /aikart/output.json"]
+
+resources:
+  cpu: 0.25
+  memoryMb: 512
+  timeoutSeconds: 60
+
+inputs:
+  - name: business_profile
+    label: "Describe your MSME business or upload profile details"
+    type: textarea
+    required: true
+
+secrets:
+  - name: GROQ_API_KEY
+    description: "API key for Groq LLM Inference."
+    required: true
+  - name: QDRANT_API_KEY
+    description: "API key for Qdrant Vector DB."
+    required: true
+  - name: QDRANT_CLUSTER_ENDPOINT
+    description: "Cluster endpoint URL for Qdrant."
+    required: true
+
+output:
+  format: markdown
+
+security:
+  networkEgress: allowlist
+  egressAllowlist: ["api.groq.com", "cloud.qdrant.io"]

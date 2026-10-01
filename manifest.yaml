@@ -1,0 +1,19 @@
+name: "BharatAgentic MSME Navigator"
+description: "An autonomous agent that extracts MSME profiles, runs multi-dimensional government compliance checks, and auto-drafts subsidy applications to replace expensive CAs for rural entrepreneurs."
+version: "1.0.0"
+category: "Citizen & GovTech"
+entrypoint: "app.py"
+docker_port: 8501
+technologies:
+  - Groq (LLM Inference)
+  - Qdrant (Vector Database)
+  - Streamlit (Frontend & Workflow UI)
+env_vars:
+  - GROQ_API_KEY
+  - QDRANT_API_KEY
+  - QDRANT_CLUSTER_ENDPOINT
+features:
+  - Multi-Dimensional API Verification
+  - Automated Form Drafting
+  - Typo/Intent Auto-Correction
+  - PDF Profile Extraction
